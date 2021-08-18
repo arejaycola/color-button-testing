@@ -1,19 +1,29 @@
 import './App.css';
-import {useState} from 'react';
+import { useState } from 'react';
 
 function App() {
-  const [buttonColor, setButtonColor] = useState('red');
+	const [buttonColor, setButtonColor] = useState('red');
+	const [disabled, setDisabled] = useState(false);
 
-  const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
+	const newButtonColor = buttonColor === 'red' ? 'blue' : 'red';
 
-
-  return (
-    <div >
-      <button 
-      onClick={() => setButtonColor(newButtonColor)}
-      style={{backgroundColor: buttonColor}}>Change to {newButtonColor}</button>
-    </div>
-  );
+	return (
+		<div>
+			<button disabled={disabled} onClick={() => setButtonColor(newButtonColor)} style={{ backgroundColor: buttonColor }}>
+				Change to {newButtonColor}
+			</button>
+			<input
+				id="disable-button-checkbox"
+				type="checkbox"
+				defaultChecked={disabled}
+				aria-checked={disabled}
+				onChange={() => {
+					setDisabled(!disabled);
+				}}
+			/>
+			<label htmlFor="disable-button-checkbox">Disable button</label>
+		</div>
+	);
 }
 
 export default App;
